@@ -1,0 +1,77 @@
+<html>
+
+<head>
+  <style>
+    .wrapper {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #canvas {
+      max-width: 500px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <canvas id="canvas" width="1200" height="752"></canvas>
+  </div>
+  <script type="module">
+    // Get the canvas element from the page, using it's ID.
+    const canvas = document.querySelector('#canvas')
+    // Get the 2D context from the canvas element. This is what we'll draw to.
+    const context = canvas.getContext('2d')
+
+    // We'll create an object to hold the license details.
+    // This could come from the server, or be filled in from input fields.
+    const licenseDetails = {
+      dl: '17810001',
+      exp: '08/31/2023',
+      ln: 'Sample',
+      fn: 'Aaron W.',
+      class: 'A',
+      end: 'None'
+    }
+
+    // Create a new image object. This represents an arbitrary image that we can load on or off screen.
+    const image = new Image()
+
+    // Define a function that we'll run once our background image has loaded.
+    const onLoad = () => {
+      // First, we draw the image object to the canvas context, placing it at the top left pixel - 0,0.
+      context.drawImage(image, 0, 0)
+
+      // Set the font we want the canvas to use.
+      context.font = "50px Monospace"
+      // Set the style that will be used when filling content, such as text or shapes.
+      context.fillStyle = 'black'
+
+      // Write some text to the canvas, filled with our current canvas fill style.
+      // We're writing it to the x & y coordinates passed as the second and third arguments.
+      context.fillText(licenseDetails.dl, 490, 187)
+      context.fillText(licenseDetails.exp, 490, 270)
+
+      // We'll make the font smaller for the next few things we write.
+      context.font = "40px Monospace"
+
+      context.fillText(licenseDetails.class, 980, 234)
+
+      // We want to make this text uppercase, so we call the "toUpperCase" function on it.
+      context.fillText(licenseDetails.ln.toUpperCase(), 490, 323)
+      context.fillText(licenseDetails.fn.toUpperCase(), 490, 363)
+      context.fillText(licenseDetails.end.toUpperCase(), 960, 267)
+    }
+
+    // Set our onLoad function, defined above, to be run when the image has finished loading.
+    image.onload = onLoad
+
+    // Set the src (source) for the image. Setting this will start the image loading.
+    image.src = 'license-background.png'
+  </script>
+</body>
+
+</html>
