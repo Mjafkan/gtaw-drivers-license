@@ -35,6 +35,14 @@
         <label for="address-one" class="form-label">Building Number and Street Name</label>
         <input name="address-one" id="address-one" class="form-control form-control-sm" />
       </div>
+      <div class="mb-3">
+        <label for="sex" class="form-label">Sex</label>
+        <select class="form-select" id="sex" aria-label="Default select example">
+          <option value="M">Male</option>
+          <option value="F">Female</option>
+        </select>
+
+      </div>
       <button type="submit">Create license</button>
     </form>
     <div id="error-message" class="alert alert-danger visually-hidden" role="alert"></div>
@@ -79,7 +87,7 @@
         class: 'A',
         end: 'None',
         dob: '27/NOV/1990',
-        sex: 'Male',
+        sex: document.querySelector('#sex').value,
         hair: 'Brown',
         eyes: 'Brown',
         hgt: '6ft 10in',
