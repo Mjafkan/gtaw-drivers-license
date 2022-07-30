@@ -33,6 +33,7 @@
       </div>
       <button type="submit">Create license</button>
     </form>
+    <div id="error-message" class="alert alert-danger visually-hidden" role="alert"></div>
     <canvas id="canvas" width="1200" height="752"></canvas>
   </div>
   <script type="module">
@@ -56,6 +57,12 @@
     const context = canvas.getContext('2d')
 
     const createLicense = async () => {
+      const errorComponent = document.querySelector('#error-message')
+
+      if (!errorComponent.classList.contains('visually-hidden')) {
+        errorComponent.classList.add('visually-hidden')
+      }
+
       // We'll create an object to hold the license details.
       // This could come from the server, or be filled in from input fields.
       const licenseDetails = {
@@ -87,7 +94,8 @@
       try {
         licensePhoto = await loadImage(licensePhotoUrl)
       } catch (error) {
-        alert('Could not load profile image.')
+        errorComponent.textContent = 'Could not load profile image. Check that name matches the MDC, including the same casing.'
+        errorComponent.classList.remove('visually-hidden')
         return
       }
 
