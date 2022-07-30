@@ -21,11 +21,17 @@
     <canvas id="canvas" width="1200" height="752"></canvas>
   </div>
   <script type="module">
+    // This function returns a promise, which is an object you can wait for without blocking other CPU work.
     const loadImage = (url) => new Promise((resolve, reject) => {
+      // Create an image object.
       const image = new Image()
+      // Set the cross-origin mode to anonymous, to avoid issues where we try to load images from a different server.
       image.crossOrigin = 'anonymous'
+      // When the image loads, resolve (return the promise) with the image object.
       image.onload = () => resolve(image)
+      // If the image encounters an error, reject the promise. This will cause anyone waiting for the promise to get an error.
       image.onerror = reject
+      // Set the image source (src) to start the image loading.
       image.src = url
     })
 
@@ -58,6 +64,7 @@
     const licenseId = `|${licenseDetails.exp.slice(-5).replace(':', '')}${licenseDetails.dl}`
     const licenseDd = `${licenseDetails.exp.slice(-10, -6)}/AN${licenseDetails.sex.slice(0, 1)}/${licenseDetails.ln.slice(0, 1)}${licenseDetails.fn.slice(0, 1)}${licenseDetails.dob.slice(-2)}/${licenseDetails.eyes.slice(0, 2)}${licenseDetails.hair.slice(0, 2)}/${licenseDetails.hgt.slice(0, 1)}${licenseDetails.wgt.slice(0, 4)}`
 
+    // The "await" keywork lets us wait until something asynchronous finishes happening. When the thing we're waiting on finishes, our program will continue running.
     const licensePhoto = await loadImage('https://mdc.gta.world/img/persons/Markos_Zenos.png?1659191844')
     const licenseSignature = await loadImage('https://i.imgur.com/EAy4n61.png')
     const licenseBackground = await loadImage('drivers-licence-clear-new.png')
