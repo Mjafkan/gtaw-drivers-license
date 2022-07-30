@@ -82,7 +82,15 @@
 
       // The "await" keywork lets us wait until something asynchronous finishes happening. When the thing we're waiting on finishes, our program will continue running.
       const licensePhotoUrl = `https://mdc.gta.world/img/persons/${licenseDetails.fn}_${licenseDetails.ln}.png`
-      const licensePhoto = await loadImage(licensePhotoUrl)
+      let licensePhoto
+
+      try {
+        licensePhoto = await loadImage(licensePhotoUrl)
+      } catch (error) {
+        alert('Could not load profile image.')
+        return
+      }
+
       const licenseSignature = await loadImage('https://i.imgur.com/EAy4n61.png')
       const licenseBackground = await loadImage('drivers-licence-clear-new.png')
 
