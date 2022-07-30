@@ -37,47 +37,65 @@
       class: 'A',
       end: 'None',
       dob: '27/NOV/1990',
-      sex: 'Male'
+      sex: 'Male',
+      hair: 'Brown',
+      eyes: 'Brown',
+      hgt: '6ft 10in',
+      wgt: '180 lbs',
+      iss: '~1'
     }
 
     //Interpilated String. (Mixing strings up)
     const licenseId = `|${licenseDetails.exp.slice(-5).replace(':', '')}${licenseDetails.dl}`
+    const licenseDd = `${licenseDetails.exp.slice(-10, -6)}/AN${licenseDetails.sex.slice(0, 1)}/${licenseDetails.ln.slice(0, 1)}${licenseDetails.fn.slice(0, 1)}${licenseDetails.dob.slice(-2)}/${licenseDetails.eyes.slice(0, 2)}${licenseDetails.hair.slice(0, 2)}/${licenseDetails.hgt.slice(0, 1)}${licenseDetails.wgt.slice(0, 4)}`
 
-    const licensePhotoUrl = 'https://imgur.com/fgZppR8'
+    const licensePhotoUrl = 'https://mdc.gta.world/img/persons/Markos_Zenos.png?1659191844'
+    const licenseSignUrl = 'https://i.imgur.com/EAy4n61.png'
 
     const photoimage = new Image()
-
     photoimage.src = licensePhotoUrl
+    const signimage = new Image()
+    signimage.src = licenseSignUrl
 
     // Create a new image object. This represents an arbitrary image that we can load on or off screen.
     const image = new Image()
 
     // Define a function that we'll run once our background image has loaded.
     const onLoad = () => {
+      console.log(photoimage.width, photoimage.height)
+      const imageRatio = 360 / photoimage.width
+      context.drawImage(photoimage, 40, 129, photoimage.width * imageRatio, photoimage.height * imageRatio)
       // First, we draw the image object to the canvas context, placing it at the top left pixel - 0,0.
+
       context.drawImage(image, 0, 0)
-      context.drawImage(photoimage, 50, 50)
+      context.drawImage(signimage, 60, 620)
+
 
       // Set the font we want the canvas to use.
-      context.font = "Bold 50px Monospace"
+      context.font = "Bold 60px Monospace"
       // Set the style that will be used when filling content, such as text or shapes. Red Text.
       context.fillStyle = 'red'
 
       // Write some text to the canvas, filled with our current canvas fill style.
       // We're writing it to the x & y coordinates passed as the second and third arguments.
-      context.fillText(licenseId, 490, 187)
+      context.fillText(licenseId, 485, 190)
       context.fillText(licenseDetails.exp.slice(0, 11), 490, 270)
 
       // Make font black
       context.fillStyle = 'black'
 
+      context.fillText(licenseDetails.iss, 1040, 730)
+
       // We'll make the font smaller for the next few things we write.
-      context.font = "40px Monospace"
+      context.font = "Bold 40px Monospace"
 
       context.fillText(licenseDetails.class, 980, 234)
       context.fillText(licenseDetails.dob, 500, 480)
-      context.fillText(licenseDetails.sex.toUpperCase().slice(0, 1), 615, 630)
-
+      context.fillText(licenseDetails.sex.toUpperCase().slice(0, 1), 615, 628)
+      context.fillText(licenseDetails.eyes.toUpperCase(), 780, 628)
+      context.fillText(licenseDetails.hair.toUpperCase().slice(0, 8), 990, 628)
+      context.fillText(licenseDetails.hgt.toUpperCase().slice(0, 8), 620, 665)
+      context.fillText(licenseDetails.wgt, 915, 665)
 
       // We want to make this text uppercase, so we call the "toUpperCase" function on it.
       context.fillText(licenseDetails.ln.toUpperCase(), 490, 323)
@@ -85,18 +103,25 @@
       context.fillText(licenseDetails.end.toUpperCase(), 955, 270)
       context.fillText(licenseDetails.end.toUpperCase(), 505, 523)
 
+
+      //licenseDd
+
       // Even smaller text
-      context.font = "35px Monospace"
+      context.font = "Bold 35px Monospace"
       context.fillText(licenseDetails.addr1.toUpperCase(), 425, 400)
       context.fillText(licenseDetails.addr2.toUpperCase(), 425, 440)
+      context.fillText(licenseDd.toUpperCase(), 600, 705)
+
 
     }
 
     // Set our onLoad function, defined above, to be run when the image has finished loading.
     image.onload = onLoad
+    photoimage.onload = onLoad
+    signimage.onload = onLoad
 
     // Set the src (source) for the image. Setting this will start the image loading.
-    image.src = 'drivers-licence-clear.png'
+    image.src = 'drivers-licence-clear-new.png'
   </script>
 </body>
 
