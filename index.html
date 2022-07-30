@@ -12,7 +12,6 @@
     #canvas {
       max-width: 500px;
     }
-
   </style>
 </head>
 
@@ -32,9 +31,10 @@
       dl: '17810001',
       exp: '08/31/2023',
       ln: 'Sample',
-      fn: 'Aaron W.',
+      fn: 'Michael W.',
       class: 'A',
-      end: 'None'
+      end: 'None',
+      dob: '18/05/1989'
     }
 
     // Create a new image object. This represents an arbitrary image that we can load on or off screen.
@@ -64,6 +64,7 @@
       context.fillText(licenseDetails.ln.toUpperCase(), 490, 323)
       context.fillText(licenseDetails.fn.toUpperCase(), 490, 363)
       context.fillText(licenseDetails.end.toUpperCase(), 960, 267)
+      context.fillText(licenseDetails.dob, 500, 480)
     }
 
     // Set our onLoad function, defined above, to be run when the image has finished loading.
