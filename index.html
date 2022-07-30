@@ -5,12 +5,13 @@
     .wrapper {
       height: 100%;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
     }
 
     #canvas {
-      max-width: 90vw;
+      max-width: 600px;
     }
   </style>
   <title>Los Santos PD License Generator</title>
@@ -18,6 +19,11 @@
 
 <body>
   <div class="wrapper">
+    <form id="form" action="javascript:;">
+      <label for=" first-name">First Name</label>
+      <input name="first-name" id="first-name" />
+      <button type="submit">Create license</button>
+    </form>
     <canvas id="canvas" width="1200" height="752"></canvas>
   </div>
   <script type="module">
@@ -40,84 +46,89 @@
     // Get the 2D context from the canvas element. This is what we'll draw to.
     const context = canvas.getContext('2d')
 
-    // We'll create an object to hold the license details.
-    // This could come from the server, or be filled in from input fields.
-    const licenseDetails = {
-      dl: '9541',
-      exp: '26/OCT/2099 14:27',
-      ln: 'Zenkos',
-      fn: 'Markos',
-      addr1: '2222 Amarillo Way',
-      addr2: 'Davis Quarry, Los Santos',
-      class: 'A',
-      end: 'None',
-      dob: '27/NOV/1990',
-      sex: 'Male',
-      hair: 'Brown',
-      eyes: 'Brown',
-      hgt: '6ft 10in',
-      wgt: '180 lbs',
-      iss: '~1'
+    const createLicense = async () => {
+      // We'll create an object to hold the license details.
+      // This could come from the server, or be filled in from input fields.
+      const licenseDetails = {
+        dl: '9541',
+        exp: '26/OCT/2099 14:27',
+        ln: 'Zenkos',
+        fn: document.querySelector('#first-name').value,
+        addr1: '2222 Amarillo Way',
+        addr2: 'Davis Quarry, Los Santos',
+        class: 'A',
+        end: 'None',
+        dob: '27/NOV/1990',
+        sex: 'Male',
+        hair: 'Brown',
+        eyes: 'Brown',
+        hgt: '6ft 10in',
+        wgt: '180 lbs',
+        iss: '~1'
+      }
+
+      //Interpolated String. (Mixing strings up)
+      const licenseId = `|${licenseDetails.exp.slice(-5).replace(':', '')}${licenseDetails.dl}`
+      const licenseDd = `${licenseDetails.exp.slice(-10, -6)}/AN${licenseDetails.sex.slice(0, 1)}/${licenseDetails.ln.slice(0, 1)}${licenseDetails.fn.slice(0, 1)}${licenseDetails.dob.slice(-2)}/${licenseDetails.eyes.slice(0, 2)}${licenseDetails.hair.slice(0, 2)}/${licenseDetails.hgt.slice(0, 1)}${licenseDetails.wgt.slice(0, 4)}`
+
+      // The "await" keywork lets us wait until something asynchronous finishes happening. When the thing we're waiting on finishes, our program will continue running.
+      const licensePhoto = await loadImage('https://mdc.gta.world/img/persons/Markos_Zenos.png?1659191844')
+      const licenseSignature = await loadImage('https://i.imgur.com/EAy4n61.png')
+      const licenseBackground = await loadImage('drivers-licence-clear-new.png')
+
+      const photoRatio = 360 / licensePhoto.width
+      context.drawImage(licensePhoto, 40, 129, licensePhoto.width * photoRatio, licensePhoto.height * photoRatio)
+
+      const signatureRatio = 200 / licenseSignature.width
+      // context.drawImage(licenseSignature, 40, 129, licenseSignature.width * photoRatio, licenseSignature.height * photoRatio)
+
+      context.drawImage(licenseBackground, 0, 0)
+      context.drawImage(licenseSignature, 60, 620)
+
+      // Set the font we want the canvas to use.
+      context.font = "Bold 60px Monospace"
+      // Set the style that will be used when filling content, such as text or shapes. Red Text.
+      context.fillStyle = 'red'
+
+      // Write some text to the canvas, filled with our current canvas fill style.
+      // We're writing it to the x & y coordinates passed as the second and third arguments.
+      context.fillText(licenseId, 485, 190)
+      context.fillText(licenseDetails.exp.slice(0, 11), 490, 270)
+
+      // Make font black
+      context.fillStyle = 'black'
+
+      context.fillText(licenseDetails.iss, 1040, 730)
+
+      // We'll make the font smaller for the next few things we write.
+      context.font = "Bold 40px Monospace"
+
+      context.fillText(licenseDetails.class, 980, 234)
+      context.fillText(licenseDetails.dob, 500, 480)
+      context.fillText(licenseDetails.sex.toUpperCase().slice(0, 1), 615, 628)
+      context.fillText(licenseDetails.eyes.toUpperCase(), 780, 628)
+      context.fillText(licenseDetails.hair.toUpperCase().slice(0, 8), 990, 628)
+      context.fillText(licenseDetails.hgt.toUpperCase().slice(0, 8), 620, 665)
+      context.fillText(licenseDetails.wgt, 915, 665)
+
+      // We want to make this text uppercase, so we call the "toUpperCase" function on it.
+      context.fillText(licenseDetails.ln.toUpperCase(), 490, 323)
+      context.fillText(licenseDetails.fn.toUpperCase(), 490, 363)
+      context.fillText(licenseDetails.end.toUpperCase(), 955, 270)
+      context.fillText(licenseDetails.end.toUpperCase(), 505, 523)
+
+
+      //licenseDd
+
+      // Even smaller text
+      context.font = "Bold 35px Monospace"
+      context.fillText(licenseDetails.addr1.toUpperCase(), 425, 400)
+      context.fillText(licenseDetails.addr2.toUpperCase(), 425, 440)
+      context.fillText(licenseDd.toUpperCase(), 600, 705)
     }
 
-    //Interpolated String. (Mixing strings up)
-    const licenseId = `|${licenseDetails.exp.slice(-5).replace(':', '')}${licenseDetails.dl}`
-    const licenseDd = `${licenseDetails.exp.slice(-10, -6)}/AN${licenseDetails.sex.slice(0, 1)}/${licenseDetails.ln.slice(0, 1)}${licenseDetails.fn.slice(0, 1)}${licenseDetails.dob.slice(-2)}/${licenseDetails.eyes.slice(0, 2)}${licenseDetails.hair.slice(0, 2)}/${licenseDetails.hgt.slice(0, 1)}${licenseDetails.wgt.slice(0, 4)}`
-
-    // The "await" keywork lets us wait until something asynchronous finishes happening. When the thing we're waiting on finishes, our program will continue running.
-    const licensePhoto = await loadImage('https://mdc.gta.world/img/persons/Markos_Zenos.png?1659191844')
-    const licenseSignature = await loadImage('https://i.imgur.com/EAy4n61.png')
-    const licenseBackground = await loadImage('drivers-licence-clear-new.png')
-
-    const photoRatio = 360 / licensePhoto.width
-    context.drawImage(licensePhoto, 40, 129, licensePhoto.width * photoRatio, licensePhoto.height * photoRatio)
-
-    const signatureRatio = 200 / licenseSignature.width
-    // context.drawImage(licenseSignature, 40, 129, licenseSignature.width * photoRatio, licenseSignature.height * photoRatio)
-
-    context.drawImage(licenseBackground, 0, 0)
-    context.drawImage(licenseSignature, 60, 620)
-
-    // Set the font we want the canvas to use.
-    context.font = "Bold 60px Monospace"
-    // Set the style that will be used when filling content, such as text or shapes. Red Text.
-    context.fillStyle = 'red'
-
-    // Write some text to the canvas, filled with our current canvas fill style.
-    // We're writing it to the x & y coordinates passed as the second and third arguments.
-    context.fillText(licenseId, 485, 190)
-    context.fillText(licenseDetails.exp.slice(0, 11), 490, 270)
-
-    // Make font black
-    context.fillStyle = 'black'
-
-    context.fillText(licenseDetails.iss, 1040, 730)
-
-    // We'll make the font smaller for the next few things we write.
-    context.font = "Bold 40px Monospace"
-
-    context.fillText(licenseDetails.class, 980, 234)
-    context.fillText(licenseDetails.dob, 500, 480)
-    context.fillText(licenseDetails.sex.toUpperCase().slice(0, 1), 615, 628)
-    context.fillText(licenseDetails.eyes.toUpperCase(), 780, 628)
-    context.fillText(licenseDetails.hair.toUpperCase().slice(0, 8), 990, 628)
-    context.fillText(licenseDetails.hgt.toUpperCase().slice(0, 8), 620, 665)
-    context.fillText(licenseDetails.wgt, 915, 665)
-
-    // We want to make this text uppercase, so we call the "toUpperCase" function on it.
-    context.fillText(licenseDetails.ln.toUpperCase(), 490, 323)
-    context.fillText(licenseDetails.fn.toUpperCase(), 490, 363)
-    context.fillText(licenseDetails.end.toUpperCase(), 955, 270)
-    context.fillText(licenseDetails.end.toUpperCase(), 505, 523)
-
-
-    //licenseDd
-
-    // Even smaller text
-    context.font = "Bold 35px Monospace"
-    context.fillText(licenseDetails.addr1.toUpperCase(), 425, 400)
-    context.fillText(licenseDetails.addr2.toUpperCase(), 425, 440)
-    context.fillText(licenseDd.toUpperCase(), 600, 705)
+    const form = document.querySelector('#form')
+    form.onsubmit = createLicense
   </script>
 </body>
 
