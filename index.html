@@ -31,6 +31,10 @@
         <label for="last-name" class="form-label">Last Name</label>
         <input name="last-name" id="last-name" class="form-control form-control-sm" />
       </div>
+      <div class="mb-3">
+        <label for="address-one" class="form-label">Building Number and Street Name</label>
+        <input name="address-one" id="address-one" class="form-control form-control-sm" />
+      </div>
       <button type="submit">Create license</button>
     </form>
     <div id="error-message" class="alert alert-danger visually-hidden" role="alert"></div>
@@ -70,7 +74,7 @@
         exp: '26/OCT/2099 14:27',
         ln: document.querySelector('#last-name').value,
         fn: document.querySelector('#first-name').value,
-        addr1: '2222 Amarillo Way',
+        addr1: document.querySelector('#address-one').value,
         addr2: 'Davis Quarry, Los Santos',
         class: 'A',
         end: 'None',
