@@ -23,29 +23,95 @@
 <body>
   <div class="wrapper">
     <form id="form" action="javascript:;">
-      <div class="mb-3">
-        <label for="first-name" class="form-label">First Name</label>
-        <input name="first-name" id="first-name" class="form-control form-control-sm" placeholder="John"
-          value="Camilla" />
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <div class="mb-3">
+              <label for="first-name" class="form-label">First Name</label>
+              <input name="first-name" id="first-name" class="form-control form-control-sm" placeholder="John"
+                value="Camilla" />
+            </div>
+            <div class="mb-3">
+              <label for="last-name" class="form-label">Last Name</label>
+              <input name="last-name" id="last-name" class="form-control form-control-sm" placeholder="Doe"
+                value="Thompson" />
+            </div>
+            <div class="mb-3">
+              <label for="sex" class="form-label">Sex</label>
+              <select class="form-select" id="sex" aria-label="Default select example">
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="dob" class="dob">Date of Birth</label>
+              <input name="dob" id="dob" class="form-control form-control-sm" placeholder="DD/MMM/YYYY"
+                value="01/JAN/0001" />
+            </div>
+            <div class="mb-3">
+              <label for="hair" class="form-label">Hair Color</label>
+              <input name="address-str" id="hair" class="form-control form-control-sm" placeholder="Brown"
+                value="Pink" />
+            </div>
+            <div class="mb-3">
+              <label for="eye" class="form-label">Eye Color</label>
+              <select class="form-select" id="eye" aria-label="Default select example">
+                <option value="Brown">Brown</option>
+                <option value="Amber">Amber</option>
+                <option value="Hazel">Hazel</option>
+                <option value="Green">Green</option>
+                <option value="Blue">Blue</option>
+                <option value="Blue">Grey</option>
+              </select>
+            </div>
+          </div>
+          <div class="col">
+            <div class="mb-3">
+              <label for="height" class="form-label">Height</label>
+              <input name="height" id="height" class="form-control form-control-sm" placeholder="5ft 8in"
+                value="6ft 4in" />
+            </div>
+            <div class="mb-3">
+              <label for=weight" class="form-label">Weight</label>
+              <input name="weight" id="weight" class="form-control form-control-sm" placeholder="105LBS"
+                value="205LBS" />
+            </div>
+            <div class="mb-3">
+              <label for=signature" class="form-label">Link to Signature</label>
+              <input name="signature" id="signature" class="form-control form-control-sm"
+                placeholder="https://i.imgur.com/wwSq9gi.png" value="https://i.imgur.com/JgQOWud.png" />
+            </div>
+          </div>
+          <div class="col">
+            <div class="mb-3">
+              <label for="room-num" class="form-label">Room Number</label>
+              <input name="room-num" id="room-num" class="form-control form-control-sm" placeholder="1" value="2" />
+            </div>
+            <div class="mb-3">
+              <label for="floor-num" class="form-label">Floor Number</label>
+              <input name=floor-num" id="floor-num" class="form-control form-control-sm" placeholder="1" value="3" />
+            </div>
+            <div class="mb-3">
+              <label for="address-num" class="form-label">Building Number</label>
+              <input name="address-num" id="address-num" class="form-control form-control-sm" placeholder="1"
+                value="123" />
+            </div>
+            <div class="mb-3">
+              <label for="address-str" class="form-label">Street Name</label>
+              <input name="address-str" id="address-str" class="form-control form-control-sm"
+                placeholder="1 San Andreas Ave" value="Value Street" />
+            </div>
+            <div class="mb-3">
+              <label for="address-cit" class="form-label">Area</label>
+              <select class="form-select" id="address-cit" aria-label="Default select example">
+                <option value="Los Santos, San Andreas">City of Los Santos</option>
+                <option value="Los Santos County, San Andreas">Los Santos County</option>
+              </select>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="last-name" class="form-label">Last Name</label>
-        <input name="last-name" id="last-name" class="form-control form-control-sm" placeholder="Doe"
-          value="Thompson" />
-      </div>
-      <div class="mb-3">
-        <label for="address-one" class="form-label">Building Number and Street Name</label>
-        <input name="address-one" id="address-one" class="form-control form-control-sm" placeholder="1 San Andreas Ave"
-          value="1 Value Street" />
-      </div>
-      <div class="mb-3">
-        <label for="sex" class="form-label">Sex</label>
-        <select class="form-select" id="sex" aria-label="Default select example">
-          <option value="M">Male</option>
-          <option value="F">Female</option>
-        </select>
 
-      </div>
       <button type="submit">Create license</button>
     </form>
     <div id="error-message" class="alert alert-danger visually-hidden" role="alert"></div>
@@ -77,7 +143,6 @@
       if (!errorComponent.classList.contains('visually-hidden')) {
         errorComponent.classList.add('visually-hidden')
       }
-
       // We'll create an object to hold the license details.
       // This could come from the server, or be filled in from input fields.
       const licenseDetails = {
@@ -85,20 +150,23 @@
         exp: '26/OCT/2099 14:27',
         ln: document.querySelector('#last-name').value,
         fn: document.querySelector('#first-name').value,
-        addr1: document.querySelector('#address-one').value,
-        addr2: 'Davis Quarry, Los Santos',
+        roonum: document.querySelector('#room-num').value,
+        flonum: document.querySelector('#floor-num').value,
+        addrnum: document.querySelector('#address-num').value,
+        addrstr: document.querySelector('#address-str').value,
+        addrcit: document.querySelector('#address-cit').value,
         class: 'A',
         end: 'None',
-        dob: '27/NOV/1990',
+        dob: document.querySelector('#dob').value,
         sex: document.querySelector('#sex').value,
-        hair: 'Brown',
-        eyes: 'Brown',
-        hgt: '6ft 10in',
-        wgt: '180 lbs',
+        hair: document.querySelector('#hair').value,
+        eyes: document.querySelector('#eye').value,
+        hgt: document.querySelector('#height').value,
+        wgt: document.querySelector('#weight').value,
         iss: '~1'
       }
-
       //Interpolated String. (Mixing strings up)
+      const addressLineOne = `RM${licenseDetails.roonum.slice(0, 2)}, FL${licenseDetails.flonum.slice(0, 2)}, ${licenseDetails.addrnum} ${licenseDetails.addrstr}`
       const licenseId = `|${licenseDetails.exp.slice(-5).replace(':', '')}${licenseDetails.dl}`
       const licenseDd = `${licenseDetails.exp.slice(-10, -6)}/AN${licenseDetails.sex.slice(0, 1)}/${licenseDetails.ln.slice(0, 1)}${licenseDetails.fn.slice(0, 1)}${licenseDetails.dob.slice(-2)}/${licenseDetails.eyes.slice(0, 2)}${licenseDetails.hair.slice(0, 2)}/${licenseDetails.hgt.slice(0, 1)}${licenseDetails.wgt.slice(0, 4)}`
 
@@ -163,8 +231,8 @@
 
       // Even smaller text
       context.font = "Bold 35px Monospace"
-      context.fillText(licenseDetails.addr1.toUpperCase(), 425, 400)
-      context.fillText(licenseDetails.addr2.toUpperCase(), 425, 440)
+      context.fillText(addressLineOne.toUpperCase(), 425, 400)
+      context.fillText(licenseDetails.addrcit.toUpperCase(), 425, 440)
       context.fillText(licenseDd.toUpperCase(), 600, 705)
     }
 
