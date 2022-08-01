@@ -79,7 +79,7 @@
             <div class="mb-3">
               <label for="exp" class="form-label">Licence Expiry Date </label>
               <input name="exp" id="exp" class="form-control form-control-sm" placeholder="26/OCT/2099 14:27"
-                value="26/OCT/9099 14:27" />
+                value="26/OCT/2099 14:27" />
             </div>
             <div class="mb-3">
               <label for="pic" class="form-label">Passport Photo Link </label>
@@ -202,22 +202,37 @@
 
         if (licenseDetails.roonum == 0) {
 
-          const addressLineOne = `${licenseDetails.addrnum} ${licenseDetails.addrstr}`
-
+          //No room or floor number = No "RM" ", " No "FL" ", "
+          const addrDetails = {
+            foomPre: '',
+            flooPre: '',
+            roomEnd: '',
+            flooEnd: ''
+          }
         } else {
 
-          const addressLineOne = `RM${licenseDetails.roonum.slice(0, 2)}, ${licenseDetails.addrnum} ${licenseDetails.addrstr}`
+          //Room number but no floor number = Add "RM" ", ", No "FL" ", ""         
+          const addrDetails = {
+            roomPre: 'RM',
+            flooPre: '',
+            roomEnd: ', ',
+            flooEnd: ''
 
+          }
         }
       } else {
-
-        const addressLineOne = `RM${licenseDetails.roonum.slice(0, 2)}, FL${licenseDetails.flonum.slice(0, 2)}, ${licenseDetails.addrnum} ${licenseDetails.addrstr}`
-
+        //If room number and floor number = Add "RM" ", " and Add "FL" ", "
+        const addrDetails = {
+          roomPre: 'RM',
+          flooPre: ', ',
+          roomEnd: 'FL',
+          flooEnd: ', '
+        }
       }
 
-
-
-      //the line below for addressLineOne shouldn't be needed once the If statement above is working.
+      //Next line for when using above If
+      //const addressLineOne = `${addrDetails.roomPre}${licenseDetails.roonum.slice(0, 2)}${addrDetails.roomEnd}${addrDetails.flooPre}${licenseDetails.flonum.slice(0, 2)}${addrDetails.flooEnd}${licenseDetails.addrnum} ${licenseDetails.addrstr}`
+      //Next line for when not using above If
       const addressLineOne = `RM${licenseDetails.roonum.slice(0, 2)}, FL${licenseDetails.flonum.slice(0, 2)}, ${licenseDetails.addrnum} ${licenseDetails.addrstr}`
       //Interpolated String. (Mixing strings up)
       const addressLineTwo = `${licenseDetails.addrdis}, ${licenseDetails.addrcit}`
