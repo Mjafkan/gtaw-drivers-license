@@ -1,2 +1,2 @@
-# lspd-drivers-license
-Los Santos Drivers License generator (for GTA World)
+# gtaw-drivers-license
+GTA World Drivers License generator
