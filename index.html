@@ -82,6 +82,11 @@
                 value="26/OCT/9099 14:27" />
             </div>
             <div class="mb-3">
+              <label for="pic" class="form-label">Passport Photo Link </label>
+              <input name="pic" id="pic" class="form-control form-control-sm"
+                placeholder="https://i.imgur.com/wwSq9gi.png" />
+            </div>
+            <div class="mb-3">
               <label for="sign" class="form-label">Signature Image Link </label>
               <input name="sign" id="sign" class="form-control form-control-sm"
                 placeholder="https://i.imgur.com/ssWq9gi.png" value="https://i.imgur.com/wwSq9gi.png" />
@@ -168,6 +173,7 @@
         hgt: document.querySelector('#height').value,
         wgt: document.querySelector('#weight').value,
         sig: document.querySelector('#sign').value,
+        pic: document.querySelector('#pic').value,
         iss: '~1'
       }
       //Interpolated String. (Mixing strings up)
