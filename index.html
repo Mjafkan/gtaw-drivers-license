@@ -72,14 +72,19 @@
                 value="6ft 4in" />
             </div>
             <div class="mb-3">
-              <label for=weight" class="form-label">Weight</label>
+              <label for="weight" class="form-label">Weight</label>
               <input name="weight" id="weight" class="form-control form-control-sm" placeholder="105LBS"
                 value="205LBS" />
             </div>
             <div class="mb-3">
-              <label for=exp" class="form-label">Licence Expiry Date </label>
+              <label for="exp" class="form-label">Licence Expiry Date </label>
               <input name="exp" id="exp" class="form-control form-control-sm" placeholder="26/OCT/2099 14:27"
                 value="26/OCT/9099 14:27" />
+            </div>
+            <div class="mb-3">
+              <label for="sign" class="form-label">Signature Image Link </label>
+              <input name="sign" id="exp" class="form-control form-control-sm"
+                placeholder="https://i.imgur.com/ssWq9gi.png" value="https://i.imgur.com/wwSq9gi.png" />
             </div>
           </div>
           <div class="col">
@@ -162,6 +167,7 @@
         eyes: document.querySelector('#eye').value,
         hgt: document.querySelector('#height').value,
         wgt: document.querySelector('#weight').value,
+        sign: document.querySelector('#weight').value,
         iss: '~1'
       }
       //Interpolated String. (Mixing strings up)
