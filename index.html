@@ -184,14 +184,23 @@
       // The "await" keywork lets us wait until something asynchronous finishes happening. When the thing we're waiting on finishes, our program will continue running.
       const licensePhotoUrl = `https://mdc.gta.world/img/persons/${licenseDetails.fn}_${licenseDetails.ln}.png`
       let licensePhoto
+      const licensePicUrl = licenseDetails.pic
 
       try {
         licensePhoto = await loadImage(licensePhotoUrl)
       } catch (error) {
-        errorComponent.textContent = 'Could not load profile image. Check that name matches the MDC, including the same casing.'
+        errorComponent.textContent = 'Could not find a Government Passport Photo on record. Check that your name is spelt correctly (Case Sensitive). '
         errorComponent.classList.remove('visually-hidden')
-        return
+        let licensePic
+        try {
+          licensePhoto = await loadImage(licensePicUrl)
+        } catch (error) {
+          errorComponent.textContent = 'Could not submitted passport photo. Check the link you have provided is correct and resubmit.'
+          errorComponent.classList.remove('visually-hidden')
+          return
+        }
       }
+
 
       const licenseSigUrl = licenseDetails.sig
       let licenseSign
@@ -199,7 +208,7 @@
       try {
         licenseSign = await loadImage(licenseSigUrl)
       } catch (error) {
-        errorComponent.textContent = 'Could not load signature image. Check the link you have provided is correct and resubmit.'
+        errorComponent.textContent = 'Could not load sumbitted signature image. Check the link you have provided is correct and resubmit.'
         errorComponent.classList.remove('visually-hidden')
         return
       }
