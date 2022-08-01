@@ -187,7 +187,7 @@
         return
       }
 
-      const licenseSignature = await loadImage('https://i.imgur.com/wwSq9gi.png')
+      const licenseSignature = await loadImage(licenseDetails.sig)
       const licenseBackground = await loadImage('drivers-licence-clear-new.png')
 
       const photoRatio = 440 / licensePhoto.width
