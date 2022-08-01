@@ -93,8 +93,8 @@
                 placeholder="https://i.imgur.com/ssWq9gi.png" value="https://i.imgur.com/wwSq9gi.png" />
             </div>
             <div class="mb-3">
-              <label for="over" class="form-label">Card State</label>
-              <select class="form-select" id="over" aria-label="Default select example">
+              <label for="background-overlay" class="form-label">Card State</label>
+              <select class="form-select" id="background-overlay" aria-label="Default select example">
                 <option value="1">Clean</option>
                 <option value="2">Dirty 1</option>
                 <option value="3">Dirty 2</option>
@@ -192,7 +192,7 @@
         wgt: document.querySelector('#weight').value,
         sig: document.querySelector('#sign').value,
         pic: document.querySelector('#pic').value,
-        over: document.querySelector('#over').value,
+        backgroundOverlay: document.querySelector('#background-overlay').value,
         iss: '~1'
       }
 
@@ -312,23 +312,23 @@
       // It's safer and less likely to make mistakes.
       // Double equals (==) means "loosely the same as", and will try to change each side to the same type to match.
       // This can give unintended consequences, like a string equalling a number.
-      if (licenseDetails.over === '1') {
+      if (licenseDetails.backgroundOverlay === '1') {
         const licenseOverlay = await loadImage('id-clean.png')
         context.drawImage(licenseOverlay, 0, 0)
       }
-      if (licenseDetails.over === '2') {
+      if (licenseDetails.backgroundOverlay === '2') {
         const licenseOverlay = await loadImage('id-dirt.png')
         context.drawImage(licenseOverlay, 0, 0)
       }
-      if (licenseDetails.over === '3') {
+      if (licenseDetails.backgroundOverlay === '3') {
         const licenseOverlay = await loadImage('id-dirt2.png')
         context.drawImage(licenseOverlay, 0, 0)
       }
-      if (licenseDetails.over === '4') {
+      if (licenseDetails.backgroundOverlay === '4') {
         const licenseOverlay = await loadImage('id-scratch.png')
         context.drawImage(licenseOverlay, 0, 0)
       }
-      if (licenseDetails.over === '5') {
+      if (licenseDetails.backgroundOverlay === '5') {
         const licenseOverlay = await loadImage('id-scratch-dirt.png')
         context.drawImage(licenseOverlay, 0, 0)
       }
