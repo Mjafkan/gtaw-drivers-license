@@ -76,11 +76,6 @@
               <input name="weight" id="weight" class="form-control form-control-sm" placeholder="105LBS"
                 value="205LBS" />
             </div>
-            <div class="mb-3">
-              <label for=signature" class="form-label">Link to Signature</label>
-              <input name="signature" id="signature" class="form-control form-control-sm"
-                placeholder="https://i.imgur.com/wwSq9gi.png" value="https://i.imgur.com/JgQOWud.png" />
-            </div>
           </div>
           <div class="col">
             <div class="mb-3">
@@ -185,14 +180,14 @@
       const licenseSignature = await loadImage('https://i.imgur.com/EAy4n61.png')
       const licenseBackground = await loadImage('drivers-licence-clear-new.png')
 
-      const photoRatio = 360 / licensePhoto.width
-      context.drawImage(licensePhoto, 40, 129, licensePhoto.width * photoRatio, licensePhoto.height * photoRatio)
+      const photoRatio = 440 / licensePhoto.width
+      context.drawImage(licensePhoto, 2, 129, licensePhoto.width * photoRatio, licensePhoto.height * photoRatio)
 
-      const signatureRatio = 200 / licenseSignature.width
+      const signatureRatio = 200 / licenseSignature.height
+      context.drawImage(licenseSignature, 20, 500, licenseSignature.width * signatureRatio, licenseSignature.height * signatureRatio)
       // context.drawImage(licenseSignature, 40, 129, licenseSignature.width * photoRatio, licenseSignature.height * photoRatio)
 
       context.drawImage(licenseBackground, 0, 0)
-      context.drawImage(licenseSignature, 60, 620)
 
       // Set the font we want the canvas to use.
       context.font = "Bold 60px Monospace"
