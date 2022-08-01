@@ -13,6 +13,7 @@
     #canvas {
       max-width: 600px;
     }
+
   </style>
   <title>GTA World: San Andreas Drivers License Generator</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -198,14 +199,30 @@
       //My attempt at an If statement so RM and FL arn't printed if there is no room or floor number.
       //Addresses might have a Room and Floor Number, or just a Room Number, or just an Address umber.
 
-      let addressLineOne = '';
-      if (licenseDetails.roonum != 0) {
-        addressLineOne += `RM${licenseDetails.roonum.slice(0, 2)}, `;
+      // Create an empty array. This is basically a list of things - you can add to it using ".push".
+      const addressLineOneParts = [];
+
+      // If the room number input is empty, it will actually have the value "" - an empty string.
+      // In JavaScript, an empty string is the same as a false value.
+      // If the string has anything in it, it will be the same as a true value.
+      // Therefore, this if statement says "if there's anything in roonum".
+      if (licenseDetails.roonum) {
+        // Push the room number into the array of address line one parts.
+        addressLineOneParts.push(`RM${licenseDetails.roonum.slice(0, 2)}`)
       }
-      if (licenseDetails.flonum != 0) {
-        addressLineOne += `FL${licenseDetails.flonum.slice(0, 2)}, `;
+
+      // Again, here we're say "if there's anything in flonum"
+      if (licenseDetails.flonum) {
+        // Push the floor number into the array of address line one parts.
+        addressLineOneParts.push(`FL${licenseDetails.flonum.slice(0, 2)}`)
       }
-      addressLineOne += `${licenseDetails.addrnum} ${licenseDetails.addrstr}`;
+
+      // We'll finally add another part to the address line 1 - this one isn't conditional.
+      addressLineOneParts.push(`${licenseDetails.addrnum} ${licenseDetails.addrstr}`);
+
+      // Now we'll join together the parts we've pushed into the array for address line 1.
+      // This avoids us having to add individual commas and spaces between the parts.
+      const addressLineOne = addressLineOneParts.join(', ')
 
       //Next line for when using above If
       //const addressLineOne = `${addrDetails.roomPre}${licenseDetails.roonum.slice(0, 2)}${addrDetails.roomEnd}${addrDetails.flooPre}${licenseDetails.flonum.slice(0, 2)}${addrDetails.flooEnd}${licenseDetails.addrnum} ${licenseDetails.addrstr}`
