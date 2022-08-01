@@ -187,7 +187,17 @@
         return
       }
 
-      const licenseSignature = await loadImage(licenseDetails.sig)
+      const licenseSigUrl = licenseDetails.sig
+      let licenseSign
+
+      try {
+        licenseSign = await loadImage(licenseSigUrl)
+      } catch (error) {
+        errorComponent.textContent = 'Could not load signature image. Check the link you have provided is correct and resubmit.'
+        errorComponent.classList.remove('visually-hidden')
+        return
+      }
+
       const licenseBackground = await loadImage('drivers-licence-clear-new.png')
 
       const photoRatio = 440 / licensePhoto.width
@@ -195,8 +205,8 @@
 
       context.drawImage(licenseBackground, 0, 0)
 
-      const signatureRatio = 500 / licenseSignature.width
-      context.drawImage(licenseSignature, 15, 600, licenseSignature.width * signatureRatio, licenseSignature.height * signatureRatio)
+      const signatureRatio = 500 / licenseSign.width
+      context.drawImage(licenseSign, 15, 600, licenseSign.width * signatureRatio, licenseSign.height * signatureRatio)
 
       // Set the font we want the canvas to use.
       context.font = "Bold 60px Monospace"
