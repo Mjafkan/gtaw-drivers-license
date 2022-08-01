@@ -198,42 +198,19 @@
       //My attempt at an If statement so RM and FL arn't printed if there is no room or floor number.
       //Addresses might have a Room and Floor Number, or just a Room Number, or just an Address umber.
 
-      if (licenseDetails.flonum == 0) {
-
-        if (licenseDetails.roonum == 0) {
-
-          //No room or floor number = No "RM" ", " No "FL" ", "
-          const addrDetails = {
-            foomPre: '',
-            flooPre: '',
-            roomEnd: '',
-            flooEnd: ''
-          }
-        } else {
-
-          //Room number but no floor number = Add "RM" ", ", No "FL" ", ""         
-          const addrDetails = {
-            roomPre: 'RM',
-            flooPre: '',
-            roomEnd: ', ',
-            flooEnd: ''
-
-          }
-        }
-      } else {
-        //If room number and floor number = Add "RM" ", " and Add "FL" ", "
-        const addrDetails = {
-          roomPre: 'RM',
-          flooPre: ', ',
-          roomEnd: 'FL',
-          flooEnd: ', '
-        }
+      let addressLineOne = '';
+      if (licenseDetails.roonum != 0) {
+        addressLineOne += `RM${licenseDetails.roonum.slice(0, 2)}, `;
       }
+      if (licenseDetails.flonum != 0) {
+        addressLineOne += `FL${licenseDetails.flonum.slice(0, 2)}, `;
+      }
+      addressLineOne += `${licenseDetails.addrnum} ${licenseDetails.addrstr}`;
 
       //Next line for when using above If
       //const addressLineOne = `${addrDetails.roomPre}${licenseDetails.roonum.slice(0, 2)}${addrDetails.roomEnd}${addrDetails.flooPre}${licenseDetails.flonum.slice(0, 2)}${addrDetails.flooEnd}${licenseDetails.addrnum} ${licenseDetails.addrstr}`
       //Next line for when not using above If
-      const addressLineOne = `RM${licenseDetails.roonum.slice(0, 2)}, FL${licenseDetails.flonum.slice(0, 2)}, ${licenseDetails.addrnum} ${licenseDetails.addrstr}`
+      //const addressLineOne = `RM${licenseDetails.roonum.slice(0, 2)}, FL${licenseDetails.flonum.slice(0, 2)}, ${licenseDetails.addrnum} ${licenseDetails.addrstr}`
       //Interpolated String. (Mixing strings up)
       const addressLineTwo = `${licenseDetails.addrdis}, ${licenseDetails.addrcit}`
       const licenseId = `|${licenseDetails.exp.slice(-5).replace(':', '')}${licenseDetails.exp.slice(-10, -8)}${licenseDetails.exp.slice(0, 2)}`
