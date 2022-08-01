@@ -177,17 +177,16 @@
         return
       }
 
-      const licenseSignature = await loadImage('https://i.imgur.com/EAy4n61.png')
+      const licenseSignature = await loadImage('https://i.imgur.com/wwSq9gi.png')
       const licenseBackground = await loadImage('drivers-licence-clear-new.png')
 
       const photoRatio = 440 / licensePhoto.width
       context.drawImage(licensePhoto, 2, 129, licensePhoto.width * photoRatio, licensePhoto.height * photoRatio)
 
-      const signatureRatio = 200 / licenseSignature.height
-      context.drawImage(licenseSignature, 20, 500, licenseSignature.width * signatureRatio, licenseSignature.height * signatureRatio)
-      // context.drawImage(licenseSignature, 40, 129, licenseSignature.width * photoRatio, licenseSignature.height * photoRatio)
-
       context.drawImage(licenseBackground, 0, 0)
+
+      const signatureRatio = 500 / licenseSignature.width
+      context.drawImage(licenseSignature, 15, 600, licenseSignature.width * signatureRatio, licenseSignature.height * signatureRatio)
 
       // Set the font we want the canvas to use.
       context.font = "Bold 60px Monospace"
