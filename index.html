@@ -146,7 +146,6 @@
       // We'll create an object to hold the license details.
       // This could come from the server, or be filled in from input fields.
       const licenseDetails = {
-        dl: '9541',
         exp: document.querySelector('#exp').value,
         ln: document.querySelector('#last-name').value,
         fn: document.querySelector('#first-name').value,
@@ -167,7 +166,7 @@
       }
       //Interpolated String. (Mixing strings up)
       const addressLineOne = `RM${licenseDetails.roonum.slice(0, 2)}, FL${licenseDetails.flonum.slice(0, 2)}, ${licenseDetails.addrnum} ${licenseDetails.addrstr}`
-      const licenseId = `|${licenseDetails.exp.slice(-5).replace(':', '')}${licenseDetails.dl}`
+      const licenseId = `|${licenseDetails.exp.slice(-5).replace(':', '')}${licenseDetails.exp.slice(-10, -8)}${licenseDetails.exp.slice(0, 2)}`
       const licenseDd = `${licenseDetails.exp.slice(-10, -6)}/AN${licenseDetails.sex.slice(0, 1)}/${licenseDetails.ln.slice(0, 1)}${licenseDetails.fn.slice(0, 1)}${licenseDetails.dob.slice(-2)}/${licenseDetails.eyes.slice(0, 2)}${licenseDetails.hair.slice(0, 2)}/${licenseDetails.hgt.slice(0, 1)}${licenseDetails.wgt.slice(0, 3)}`
 
       // The "await" keywork lets us wait until something asynchronous finishes happening. When the thing we're waiting on finishes, our program will continue running.
