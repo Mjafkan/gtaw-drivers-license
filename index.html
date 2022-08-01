@@ -76,6 +76,11 @@
               <input name="weight" id="weight" class="form-control form-control-sm" placeholder="105LBS"
                 value="205LBS" />
             </div>
+            <div class="mb-3">
+              <label for=exp" class="form-label">Licence Expiry Date </label>
+              <input name="exp" id="exp" class="form-control form-control-sm" placeholder="26/OCT/2099 14:27"
+                value="26/OCT/9099 14:27" />
+            </div>
           </div>
           <div class="col">
             <div class="mb-3">
@@ -142,7 +147,7 @@
       // This could come from the server, or be filled in from input fields.
       const licenseDetails = {
         dl: '9541',
-        exp: '26/OCT/2099 14:27',
+        exp: document.querySelector('#exp').value,
         ln: document.querySelector('#last-name').value,
         fn: document.querySelector('#first-name').value,
         roonum: document.querySelector('#room-num').value,
@@ -163,7 +168,7 @@
       //Interpolated String. (Mixing strings up)
       const addressLineOne = `RM${licenseDetails.roonum.slice(0, 2)}, FL${licenseDetails.flonum.slice(0, 2)}, ${licenseDetails.addrnum} ${licenseDetails.addrstr}`
       const licenseId = `|${licenseDetails.exp.slice(-5).replace(':', '')}${licenseDetails.dl}`
-      const licenseDd = `${licenseDetails.exp.slice(-10, -6)}/AN${licenseDetails.sex.slice(0, 1)}/${licenseDetails.ln.slice(0, 1)}${licenseDetails.fn.slice(0, 1)}${licenseDetails.dob.slice(-2)}/${licenseDetails.eyes.slice(0, 2)}${licenseDetails.hair.slice(0, 2)}/${licenseDetails.hgt.slice(0, 1)}${licenseDetails.wgt.slice(0, 4)}`
+      const licenseDd = `${licenseDetails.exp.slice(-10, -6)}/AN${licenseDetails.sex.slice(0, 1)}/${licenseDetails.ln.slice(0, 1)}${licenseDetails.fn.slice(0, 1)}${licenseDetails.dob.slice(-2)}/${licenseDetails.eyes.slice(0, 2)}${licenseDetails.hair.slice(0, 2)}/${licenseDetails.hgt.slice(0, 1)}${licenseDetails.wgt.slice(0, 3)}`
 
       // The "await" keywork lets us wait until something asynchronous finishes happening. When the thing we're waiting on finishes, our program will continue running.
       const licensePhotoUrl = `https://mdc.gta.world/img/persons/${licenseDetails.fn}_${licenseDetails.ln}.png`
