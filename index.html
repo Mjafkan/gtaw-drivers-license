@@ -191,16 +191,7 @@
       } catch (error) {
         errorComponent.textContent = 'Could not find a Government Passport Photo on record. Check that your name is spelt correctly (Case Sensitive). '
         errorComponent.classList.remove('visually-hidden')
-        let licensePic
-        try {
-          licensePhoto = await loadImage(licensePicUrl)
-        } catch (error) {
-          errorComponent.textContent = 'Could not submitted passport photo. Check the link you have provided is correct and resubmit.'
-          errorComponent.classList.remove('visually-hidden')
-          return
-        }
       }
-
 
       const licenseSigUrl = licenseDetails.sig
       let licenseSign
