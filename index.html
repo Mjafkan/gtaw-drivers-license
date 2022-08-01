@@ -307,33 +307,31 @@
       context.fillText(addressLineTwo.toUpperCase(), 425, 440)
       context.fillText(licenseDd.toUpperCase(), 600, 705)
 
-      if (licenseDetails.over == 1) {
-
+      // Prefer triple equals over double equals.
+      // Triple equals (===) means "strictly the same as", and checks both the type and value of each side.
+      // It's safer and less likely to make mistakes.
+      // Double equals (==) means "loosely the same as", and will try to change each side to the same type to match.
+      // This can give unintended consequences, like a string equalling a number.
+      if (licenseDetails.over === '1') {
         const licenseOverlay = await loadImage('id-clean.png')
         context.drawImage(licenseOverlay, 0, 0)
-
-      } else if (licenseDetails.over == 2) {
-
+      }
+      if (licenseDetails.over === '2') {
         const licenseOverlay = await loadImage('id-dirt.png')
         context.drawImage(licenseOverlay, 0, 0)
-
-      } else if (licenseDetails.over == 3) {
-
+      }
+      if (licenseDetails.over === '3') {
         const licenseOverlay = await loadImage('id-dirt2.png')
         context.drawImage(licenseOverlay, 0, 0)
-
-      } else if (licenseDetails.over == 4) {
-
+      }
+      if (licenseDetails.over === '4') {
         const licenseOverlay = await loadImage('id-scratch.png')
         context.drawImage(licenseOverlay, 0, 0)
-
-      } else if (licenseDetails.over == 5) {
-
+      }
+      if (licenseDetails.over === '5') {
         const licenseOverlay = await loadImage('id-scratch-dirt.png')
         context.drawImage(licenseOverlay, 0, 0)
-
       }
-
     }
 
     const form = document.querySelector('#form')
