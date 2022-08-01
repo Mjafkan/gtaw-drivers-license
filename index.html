@@ -198,10 +198,10 @@
         return
       }
 
-      const licenseBackground = await loadImage('drivers-licence-clear-new.png')
+      const licenseBackground = await loadImage('drivers-licence-colour.png')
 
       const photoRatio = 440 / licensePhoto.width
-      context.drawImage(licensePhoto, 2, 129, licensePhoto.width * photoRatio, licensePhoto.height * photoRatio)
+      context.drawImage(licensePhoto, 2, 140, licensePhoto.width * photoRatio, licensePhoto.height * photoRatio)
 
       context.drawImage(licenseBackground, 0, 0)
 
@@ -232,7 +232,7 @@
       context.fillText(licenseDetails.eyes.toUpperCase(), 780, 628)
       context.fillText(licenseDetails.hair.toUpperCase().slice(0, 8), 990, 628)
       context.fillText(licenseDetails.hgt.toUpperCase().slice(0, 8), 620, 665)
-      context.fillText(licenseDetails.wgt, 915, 665)
+      context.fillText(licenseDetails.wgt.toUpperCase(), 915, 665)
 
       // We want to make this text uppercase, so we call the "toUpperCase" function on it.
       context.fillText(licenseDetails.ln.toUpperCase(), 490, 323)
