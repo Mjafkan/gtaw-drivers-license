@@ -1,4 +1,4 @@
-<html>
+as<html>
 
 <head>
   <style>
@@ -241,7 +241,7 @@
       try {
         licensePhoto = await loadImage(licensePhotoUrl)
       } catch (error) {
-        errorComponent.textContent = 'Could not find a Government Passport Photo on record. Check that your name is spelt correctly (Case Sensitive). '
+        errorComponent.textContent = 'Could not load submitted photo image. Check the link you have provided is correct and resubmit.'
         errorComponent.classList.remove('visually-hidden')
       }
 
