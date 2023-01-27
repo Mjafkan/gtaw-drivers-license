@@ -239,7 +239,7 @@ as<html>
       const licensePicUrl = licenseDetails.pic
 
       try {
-        licensePhoto = await loadImage(licensePhotoUrl)
+        licensePhoto = await loadImage(licensePicUrl)
       } catch (error) {
         errorComponent.textContent = 'Could not load submitted photo image. Check the link you have provided is correct and resubmit.'
         errorComponent.classList.remove('visually-hidden')
