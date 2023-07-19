@@ -234,6 +234,8 @@ as<html>
       const licenseDd = `${licenseDetails.exp.slice(-10, -6)}/AN${licenseDetails.sex.slice(0, 1)}/${licenseDetails.ln.slice(0, 1)}${licenseDetails.fn.slice(0, 1)}${licenseDetails.dob.slice(-2)}/${licenseDetails.eyes.slice(0, 2)}${licenseDetails.hair.slice(0, 2)}/${licenseDetails.hgt.slice(0, 1)}${licenseDetails.wgt.slice(0, 3)}`
 
       // The "await" keywork lets us wait until something asynchronous finishes happening. When the thing we're waiting on finishes, our program will continue running.
+      const licensePhotoUrl = `https://mdc.gta.world/img/persons/${licenseDetails.fn}_${licenseDetails.ln}.png`
+      let licensePhoto
       const licensePicUrl = licenseDetails.pic
 
       try {
